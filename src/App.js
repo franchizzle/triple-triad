@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
-import { Client } from 'boardgame.io/react';
-import { Game } from 'boardgame.io/core';
 
+import './App.css';
+
+import { Client } from 'boardgame.io/react';
+import TripleTriad from './TripleTriad';
 
 class GameBoard extends Component {
   onCardClick(id) {
