@@ -1,7 +1,13 @@
 import { Game } from 'boardgame.io/core';
-import { checkNeighbors, randomizeCards, removeCardFromHand, checkCard } from './utilities';
+import { checkNeighbors, randomizeCards, removeCardFromHand, checkCard, unsetSelectedCard, flipCards } from './utilities';
 
 const TripleTriad = Game({
+  /* Setup:
+   * Each cell is initially an object with a null player assignment and null card value
+   * Randomizes the hand of both players
+   * Sets the selectedCard to none
+   * Both players initially have no captures on the board
+  */
   setup: (ctx) => ({
     cells: Array(9).fill({player: null, card: null}),
     firstPlayerHand: randomizeCards(ctx),
@@ -10,69 +16,48 @@ const TripleTriad = Game({
     firstPlayerCaptures: [],
     secondPlayerCaptures: [],
   }),
+
   moves: {
-    // select card, select cell
-    selectCard(G, ctx, id) {
+    /* selectCard:
+     * @param G: boardgame.io Game object
+     * @param ctx: boardgame.io Context object
+     * @param index: index of the card in the Players hand TEST
+     * When a player clicks a card in their hand...
+     * Sets the selectedCard in the game state. This card can now be placed on the board.
+    */
+    selectCard(G, ctx, index) {
       if (ctx.currentPlayer === '0') {
-        G.selectedCard = G.firstPlayerHand[id];
+        G.selectedCard = G.firstPlayerHand[index];
       } else {
-        G.selectedCard = G.secondPlayerHand[id];
+        G.selectedCard = G.secondPlayerHand[index];
       }
     },
 
-    selectCell(G, ctx, id) {
+    /* selectCell
+     * @param G: boardgame.io Game object
+     * @param ctx: boardgame.io Context object
+     * @param index: index of the cell in the game state's cells array
+     * When a player clicks a grid cell...
+     * If the player has selected a card from their deck, and that cell has not already been assigned a card
+     * Sets the player and card for the cell ID, then adds that cell to the current player's Captures.
+     * Finally, removes the card from the player's hand.
+    */
+    selectCell(G, ctx, index) {
       let player = null;
-      if (G.cells[id].card === null && G.selectedCard) {
-        G.cells[id].card = G.selectedCard;
-        G.cells[id].player = ctx.currentPlayer;
+      if (G.cells[index].card === null && G.selectedCard) {
+        G.cells[index].card = G.selectedCard;
+        G.cells[index].player = ctx.currentPlayer;
         if (ctx.currentPlayer === '0') {
-          G.firstPlayerCaptures.push(id);
+          G.firstPlayerCaptures.push(index);
           player = G.firstPlayerHand;
         } else {
-          G.secondPlayerCaptures.push(id);
+          G.secondPlayerCaptures.push(index);
           player = G.secondPlayerHand;
         }
         removeCardFromHand(player);
+        flipCards(G, ctx, index);
+        unsetSelectedCard(G);
       }
-
-      const neighbors = checkNeighbors(id);
-      neighbors.map((dir) => {
-        if (G.cells[dir].card !== null) {
-          let val = null;
-          let inv = null;
-          if (id+1 === dir) {
-            val = 1;
-            inv = 3;
-          }
-          if (id+3 === dir) {
-            val = 2;
-            inv = 0;
-          }
-          if (id-1 === dir) {
-            val = 3;
-            inv = 1;
-          }
-          if (id-3 === dir) {
-            val = 0;
-            inv = 2;
-          }
-
-          if ((ctx.currentPlayer === '0' && G.secondPlayerCaptures.includes(dir)) || (ctx.currentPlayer === '1' && G.firstPlayerCaptures.includes(dir))) {
-            let capture = checkCard(val, G.selectedCard, G.cells[dir], inv, ctx.currentPlayer);
-            if (capture) {
-              if (ctx.currentPlayer === '0') {
-                const index = G.secondPlayerCaptures.indexOf(dir);
-                G.secondPlayerCaptures.splice(index, 1);
-                G.firstPlayerCaptures.push(dir);
-              } else {
-                const index = G.firstPlayerCaptures.indexOf(dir);
-                G.firstPlayerCaptures.splice(index, 1);
-                G.secondPlayerCaptures.push(dir);
-              }
-            }
-          };
-        }
-      })
     }
   },
 
