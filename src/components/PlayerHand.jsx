@@ -10,13 +10,14 @@ import Card from './Card';
 */
 class PlayerHand extends Component {
   render() {
-    const { active, hand, score } = this.props;
+    const { active, hand, score, player } = this.props;
     return (
       <div className={`player ${active ? "current" : ""}`}>
         {
           hand.map((card, index) => {
             return (
               <Card
+                player={player}
                 index={index}
                 onCardClick={(index) => this.props.onCardClick(index)}
                 card={card}

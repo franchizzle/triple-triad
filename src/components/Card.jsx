@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 class Card extends Component {
   render() {
-    const { card, index } = this.props;
+    const { card, index, player } = this.props;
     console.log(index);
     return (
-      <div className="card" onClick={() => this.props.onCardClick(index)}>
+      <div className={"card " + player} onClick={() => this.props.onCardClick(index)}>
         { card.map((v) => {
             return (
               <div className="cardScore">{v}</div>

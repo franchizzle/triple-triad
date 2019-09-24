@@ -47,6 +47,7 @@ class GameBoard extends Component {
         <PlayerHand
           hand={this.props.G.firstPlayerHand}
           active={this.isFirstPlayer()}
+          player={"player1"}
           score={this.props.G.firstPlayerCaptures.length}
           onCardClick={(card) => this.onCardClick(card)}
         />
@@ -58,6 +59,7 @@ class GameBoard extends Component {
         <PlayerHand
           hand={this.props.G.secondPlayerHand}
           active={!this.isFirstPlayer()}
+          player={"player2"}
           score={this.props.G.secondPlayerCaptures.length}
           onCardClick={(card) => this.onCardClick(card)}
         />
