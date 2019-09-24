@@ -111,20 +111,20 @@ export function flipCards(G, ctx, index) {
       }
       if (index - 3 === direction) {
         value = 0;
-        inv = 2;
+        inverse = 2;
       }
 
-      if ((ctx.currentPlayer === '0' && G.secondPlayerCaptures.includes(dir)) || (ctx.currentPlayer === '1' && G.firstPlayerCaptures.includes(dir))) {
-        let capture = checkCard(val, G.selectedCard, G.cells[dir], inv, ctx.currentPlayer);
+      if ((ctx.currentPlayer === '0' && G.secondPlayerCaptures.includes(direction)) || (ctx.currentPlayer === '1' && G.firstPlayerCaptures.includes(direction))) {
+        let capture = checkCard(value, G.selectedCard, G.cells[direction], inverse, ctx.currentPlayer);
         if (capture) {
           if (ctx.currentPlayer === '0') {
-            const index = G.secondPlayerCaptures.indexOf(dir);
+            const index = G.secondPlayerCaptures.indexOf(direction);
             G.secondPlayerCaptures.splice(index, 1);
-            G.firstPlayerCaptures.push(dir);
+            G.firstPlayerCaptures.push(direction);
           } else {
-            const index = G.firstPlayerCaptures.indexOf(dir);
+            const index = G.firstPlayerCaptures.indexOf(direction);
             G.firstPlayerCaptures.splice(index, 1);
-            G.secondPlayerCaptures.push(dir);
+            G.secondPlayerCaptures.push(direction);
           }
         }
       }
