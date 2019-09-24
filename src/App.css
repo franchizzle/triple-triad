@@ -1,0 +1,58 @@
+.tripleTriadGame {
+  display: flex;
+}
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 300px;
+  width: 300px;
+}
+
+.cell:nth-child(even) {
+  background: gray;
+}
+
+.cell:nth-child(odd) {
+  background: pink;
+}
+
+.cell {
+  align-items: center;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  min-height: 100px;
+}
+
+.cell p {
+  font-size: 4em;
+  margin: 0;
+}
+
+.card {
+  border: 1px solid gray;
+  display: grid;
+  grid-template-areas: ". top ."
+                    "left . right"
+                      ". bottom .";
+  margin: 1em;
+  padding: .25em;
+  pointer-events: none;
+}
+
+.current .card {
+  pointer-events: auto;
+}
+
+.cardScore:nth-child(1) {
+  grid-area: top;
+}
+.cardScore:nth-child(2) {
+  grid-area: right;
+}
+.cardScore:nth-child(3) {
+  grid-area: bottom;
+}
+.cardScore:nth-child(4) {
+  grid-area: left;
+}
