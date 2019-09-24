@@ -20,7 +20,7 @@ class GameBoard extends Component {
 
   isActive(id) {
     if (!this.props.isActive) return false;
-    if (this.props.G.cells[id] !== null) return false;
+    if (this.props.G.cells[id].card !== null) return false;
     return true;
   }
 
@@ -29,9 +29,10 @@ class GameBoard extends Component {
   }
 
   playerCaptured(id) {
-    if (this.props.G.cells[id] === null) {
+    if (id === null) {
       return 'blank';
     } else {
+      return id === '0' ? 'player1' : 'player2';
       // if it's player 1 that put the card, return player1 class
       // else, if it's player 2,  return player2 class
     }
@@ -64,14 +65,15 @@ class GameBoard extends Component {
                 )
               })
             }
+            <div>Score: {this.props.G.firstPlayerCaptures.length} </div>
         </div>
         <div className="board">
           {
             this.props.G.cells.map((id, index) => {
-              let cellValue = this.props.G.selectedCard ? id : "";
+              let cellValue = this.props.G.selectedCard ? id.card : [];
               return (
                 <div key={index} className="cell" onClick={() => this.onClick(index)}>
-                  <div className={`card selected ${this.playerCaptured(index)}`}>
+                  <div className={`card selected ${this.playerCaptured(id.player)}`}>
                     { 
                       cellValue ? 
                       (cellValue.map((v) => {
@@ -102,6 +104,7 @@ class GameBoard extends Component {
               )
             })
           }
+          <div>Score: {this.props.G.secondPlayerCaptures.length} </div>
         </div>
         { winner }
       </div>
@@ -117,14 +120,13 @@ function isDraw() {
 
 }
 
-function checkCard(direction, playerCard, enemyCard, inv) {
-  let flipCard = false;
+function checkCard(direction, playerCard, cell, inv, currentPlayer) {
+  const enemyCard = cell.card;
   if (enemyCard) {
-    console.log("Enemy " + enemyCard, "Player " + playerCard, "Direction " + direction);
+    // console.log("Enemy " + enemyCard, "Player " + playerCard, "Direction " + direction);
     if (playerCard[direction] > enemyCard[inv]) {
-      flipCard = true;
-      console.log(flipCard, "yasss");
-      return flipCard;
+      cell.player = currentPlayer;
+      return true;
     }
   }
   // if yes, check if playerCard > enemyCard in corresponding direction
@@ -171,7 +173,7 @@ function removeCardFromHand(card, id) {
 
 const TripleTriad = Game({
   setup: (ctx) => ({ 
-    cells: Array(9).fill(null),
+    cells: Array(9).fill({player: null, card: null}),
     firstPlayerHand: randomizeCards(ctx),
     secondPlayerHand: randomizeCards(ctx),
     selectedCard: null,
@@ -190,8 +192,9 @@ const TripleTriad = Game({
 
     selectCell(G, ctx, id) {
       let player = null;
-      if (G.cells[id] === null) {
-        G.cells[id] = G.selectedCard;
+      if (G.cells[id].card === null) {
+        G.cells[id].card = G.selectedCard;
+        G.cells[id].player = ctx.currentPlayer;
         if (ctx.currentPlayer === '0') {
           G.firstPlayerCaptures.push(id);
           player = G.firstPlayerHand;
@@ -204,7 +207,7 @@ const TripleTriad = Game({
 
       const neighbors = checkNeighbors(id);
       neighbors.map((dir) => {
-        if (G.cells[dir] !== null) {
+        if (G.cells[dir].card !== null) {
           let val = null;
           let inv = null;
           if (id+1 === dir) {
@@ -225,7 +228,7 @@ const TripleTriad = Game({
           }
 
           if ((ctx.currentPlayer === '0' && G.secondPlayerCaptures.includes(dir)) || (ctx.currentPlayer === '1' && G.firstPlayerCaptures.includes(dir))) {
-            let capture = checkCard(val, G.selectedCard, G.cells[dir], inv);
+            let capture = checkCard(val, G.selectedCard, G.cells[dir], inv, ctx.currentPlayer);
             if (capture) {
               if (ctx.currentPlayer === '0') {
                 const index = G.secondPlayerCaptures.indexOf(dir);
@@ -248,7 +251,7 @@ const TripleTriad = Game({
       // if win
       if (G.cells.every(cell => cell !== null)) {
         console.log("end game");
-        if (G.secondPlayerCaptures.length > G.firstPlayerCaptures) {
+        if (G.secondPlayerCaptures.length > G.firstPlayerCaptures.length) {
           
         } else {
 

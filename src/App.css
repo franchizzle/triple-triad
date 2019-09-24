@@ -44,6 +44,14 @@
   pointer-events: auto;
 }
 
+.selected.card.player1 {
+  background: red;
+}
+
+.selected.card.player2 {
+  background: blue;
+}
+
 .cardScore:nth-child(1) {
   grid-area: top;
 }
