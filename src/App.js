@@ -10,9 +10,8 @@ class GameBoard extends Component {
     this.props.moves.selectCard(id);
   }
 
-  // when grid cell is clicked
-  onClick(id) {
-    if(this.isActive(id)) {
+  onBoardCellClick(id) {
+    if(this.cellIsEmpty(id)) {
       this.props.moves.selectCell(id);
       if (this.props.G.selectedCard !== null) {
         this.props.events.endTurn();
@@ -20,7 +19,7 @@ class GameBoard extends Component {
     }
   }
 
-  isActive(id) {
+  cellIsEmpty(id) {
     if (!this.props.isActive) return false;
     if (this.props.G.cells[id].card !== null) return false;
     return true;
@@ -49,7 +48,7 @@ class GameBoard extends Component {
         <div id="winner">Draw!</div>
       );
     }
-    
+
     return (
       <div className="tripleTriadGame">
         <div className={`player player1 ${this.isFirstPlayer() ? "current" : ""}`}>
@@ -74,10 +73,10 @@ class GameBoard extends Component {
             this.props.G.cells.map((id, index) => {
               let cellValue = this.props.G.selectedCard ? id.card : [];
               return (
-                <div key={index} className="cell" onClick={() => this.onClick(index)}>
+                <div key={index} className="cell" onClick={() => this.onBoardCellClick(index)}>
                   <div className={`card selected ${this.playerCaptured(id.player)}`}>
-                    { 
-                      cellValue ? 
+                    {
+                      cellValue ?
                       (cellValue.map((v) => {
                         return (
                           <div className="cardScore">{v}</div>
