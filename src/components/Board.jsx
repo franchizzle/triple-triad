@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Card from './Card';
+
 /* Board
  * @props cells: the boardgame.io game object for the grid cells
  * @props selectedCard: keeps track of the card currently selected from a player's hand
@@ -14,7 +16,9 @@ class Board extends Component {
       // else, if it's player 2,  return player2 class
     }
   }
-
+  blank() {
+    return;
+  }
   render() {
     const { cells, selectedCard } = this.props;
 
@@ -22,20 +26,18 @@ class Board extends Component {
       <div className="board">
         {
           cells.map((id, index) => {
-            let cellValue = selectedCard ? id.card : [];
+            let card = id.card ? id.card : [];
             return (
               <div key={index} className="cell" onClick={() => this.props.onBoardCellClick(index)}>
-                <div className={`card selected ${this.playerCaptured(id.player)}`}>
-                  {
-                    cellValue ?
-                    (cellValue.map((v) => {
-                      return (
-                        <div className="cardScore">{v}</div>
-                      )
-                    })) :
-                    ""
-                  }
-                </div>
+                { card
+                  ? <Card
+                      player={this.playerCaptured(id.player)}
+                      index={index}
+                      onCardClick={() => this.blank() }
+                      card={card}
+                    />
+                  : null
+                }
               </div>
             )
           })
