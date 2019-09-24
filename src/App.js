@@ -11,10 +11,11 @@ class GameBoard extends Component {
 
   // when grid cell is clicked
   onClick(id) {
-    console.log(id);
     if(this.isActive(id)) {
       this.props.moves.selectCell(id);
-      this.props.events.endTurn();
+      if (this.props.G.selectedCard !== null) {
+        this.props.events.endTurn();
+      }
     }
   }
 
@@ -41,7 +42,7 @@ class GameBoard extends Component {
   render() {
     let winner = '';
     if (this.props.ctx.gameover) {
-      winner = this.props.ctx.gameoever.winner !== undefined ? (
+      winner = this.props.ctx.gameover.winner !== undefined ? (
         <div id="winner">Winner: {this.props.ctx.gameover.winner}</div>
       ) : (
         <div id="winner">Draw!</div>
@@ -106,7 +107,7 @@ class GameBoard extends Component {
           }
           <div>Score: {this.props.G.secondPlayerCaptures.length} </div>
         </div>
-        { winner }
+        <div>{ winner }</div>
       </div>
     )
   }
@@ -192,7 +193,7 @@ const TripleTriad = Game({
 
     selectCell(G, ctx, id) {
       let player = null;
-      if (G.cells[id].card === null) {
+      if (G.cells[id].card === null && G.selectedCard) {
         G.cells[id].card = G.selectedCard;
         G.cells[id].player = ctx.currentPlayer;
         if (ctx.currentPlayer === '0') {
@@ -249,12 +250,14 @@ const TripleTriad = Game({
   flow: {
     endGameIf: (G, ctx) => {
       // if win
-      if (G.cells.every(cell => cell !== null)) {
+      if (G.cells.every(cell => cell.card !== null)) {
         console.log("end game");
         if (G.secondPlayerCaptures.length > G.firstPlayerCaptures.length) {
-          
-        } else {
-
+          return { winner: '1' };
+        } else if (G.secondPlayerCaptures.length < G.firstPlayerCaptures.length) {
+          return { winner: '0' };
+        } else if (G.secondPlayerCaptures.length === G.firstPlayerCaptures.length) {
+          return { draw: 'true' };
         }
       }
       // if draw
