@@ -55,7 +55,8 @@ const TripleTriad = Game({
           G.secondPlayerCaptures.push(index);
           player = G.secondPlayerHand;
         }
-        removeCardFromHand(player);
+
+        removeCardFromHand(player, G.selectedCardIndex);
         flipCards(G, ctx, index);
         unsetSelectedCard(G);
       }
