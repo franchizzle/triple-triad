@@ -1,5 +1,6 @@
 .tripleTriadGame {
   display: flex;
+  align-items: center;
 }
 .board {
   display: grid;
