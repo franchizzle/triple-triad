@@ -10,8 +10,12 @@ export function checkCard(direction, playerCard, cell, inv, currentPlayer) {
   // if yes, check if playerCard > enemyCard in corresponding direction
 }
 
-export function removeCardFromHand(card, id) {
-  card.splice(id, 1);
+/* removeCardFromHand
+ * @param playerHand: the hand of the player who dropped the card
+ * @param index: the index of the dropped card in the player's hand
+*/
+export function removeCardFromHand(playerHand, index) {
+  playerHand.splice(index, 1);
 }
 
 export function randomizeCards(ctx) {
