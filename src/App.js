@@ -14,7 +14,9 @@ class GameBoard extends Component {
     console.log(id);
     if(this.isActive(id)) {
       this.props.moves.selectCell(id);
-      this.props.events.endTurn();
+      if (this.props.G.selectedCard !== null) {
+        this.props.events.endTurn();
+      }
     }
   }
 
@@ -192,7 +194,7 @@ const TripleTriad = Game({
 
     selectCell(G, ctx, id) {
       let player = null;
-      if (G.cells[id].card === null) {
+      if (G.cells[id].card === null && G.selectedCard) {
         G.cells[id].card = G.selectedCard;
         G.cells[id].player = ctx.currentPlayer;
         if (ctx.currentPlayer === '0') {
