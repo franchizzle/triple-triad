@@ -9,8 +9,8 @@ import Board from './components/Board';
 import PlayerHand from './components/PlayerHand';
 
 class GameBoard extends Component {
-  onCardClick(id) {
-    this.props.moves.selectCard(id);
+  onCardClick(card) {
+    this.props.moves.selectCard(card);
   }
 
   onBoardCellClick(id) {
