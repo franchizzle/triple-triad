@@ -35,7 +35,10 @@ export function removeCardFromHand(playerHand, index) {
 export function randomizeCards(ctx) {
   let cards = [];
   for(let i = 0; i < 5; i++) {
-    cards.push(ctx.random.Die(10, 4));
+    cards.push({
+      values: ctx.random.Die(10, 4),
+      image: "url(https://placedog.net/270/" + (400 + i) + ")" 
+    });
   }
   return cards;
 }

@@ -6,16 +6,18 @@
 .board {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  height: 300px;
-  width: 300px;
+  width: 450px;
+  height: 600px;
+  border: 2px solid #aaa;
+  box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
 }
 
 .cell:nth-child(even) {
-  background: gray;
+  background: #efefde;
 }
 
 .cell:nth-child(odd) {
-  background: pink;
+  background: #dedecd;
 }
 
 .cell {
@@ -23,7 +25,8 @@
   color: #fff;
   display: flex;
   justify-content: center;
-  min-height: 100px;
+  height: 200px;
+  width: 150px;
 }
 
 .cell p {
@@ -39,11 +42,13 @@
                     "left . right"
                       ". bottom .";
   margin: 1em;
-  min-height: 50px;
-  min-width: 40px;
   padding: .25em;
   pointer-events: none;
-
+  height: 180px;
+  max-height: 180px;
+  width: 130px;
+  max-width: 130px;
+  background-size: cover !important;
   &.blank {
     display: none;
   }
@@ -59,17 +64,37 @@
 
 .card.player2 {
   background: blue;
+
 }
 
-.cardScore:nth-child(1) {
+.card-scores {
+  display: grid;
+  grid-template-areas: ". top ."
+                    "left . right"
+                      ". bottom .";
+  grid-area: top left;
+  height: 50px;
+  width: 40px;
+}
+.card-score {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  text-shadow: 0px 0px 3px #000;
+  margin: 0;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+.card-score:nth-child(1) {
   grid-area: top;
 }
-.cardScore:nth-child(2) {
+.card-score:nth-child(2) {
   grid-area: right;
 }
-.cardScore:nth-child(3) {
+.card-score:nth-child(3) {
   grid-area: bottom;
 }
-.cardScore:nth-child(4) {
+.card-score:nth-child(4) {
   grid-area: left;
 }
