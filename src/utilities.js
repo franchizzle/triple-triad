@@ -2,17 +2,17 @@
  * Compares an opponents card against a card recently placed, by comparing the two adjacent numerical values
  * @param direction(int): The adjacent direction to check the card. Can be 0 (up), 1 (right), 2 (down) or 3 (left).
  * @param inverse(object): An object holding the values of the card to compare against.
- * @param cell(object): The adjacent grid cell that we are checking against
+ * @param neighbor(object): The adjacent grid cell that we are checking against
  * @param currentPlayer: the player who placed the card
  * @param playerCard: the current player's card
 */
-export function checkCard(direction, inverse, cell, playerCard, currentPlayer) {
+export function checkCard(direction, inverse, neighbor, playerCard, currentPlayer) {
 
-  const enemyCard = cell.card;
+  const enemyCard = neighbor.card;
 
   if (enemyCard) {
     if (playerCard[direction] > enemyCard[inverse]) {
-      cell.player = currentPlayer;
+      neighbor.player = currentPlayer;
       return true;
     }
   }
@@ -87,38 +87,39 @@ export function unsetSelectedCard(G) {
 */
 export function flipCards(G, ctx, index) {
   const neighbors = checkNeighbors(index);
-  neighbors.map((direction) => {
-    if (G.cells[direction].card !== null) {
-      let value = null;
+  neighbors.map((neighbor) => {
+    if (G.cells[neighbor].card !== null) {
+      let direction = null;
       let inverse = null;
-      if (index + 1 === direction) {
-        value = 1;
+      if (index + 1 === neighbor) {
+        direction = 1;
         inverse = 3;
       }
-      if (index + 3 === direction) {
-        value = 2;
+      if (index + 3 === neighbor) {
+        direction = 2;
         inverse = 0;
       }
-      if (index - 1 === direction) {
-        value = 3;
+      if (index - 1 === neighbor) {
+        direction = 3;
         inverse = 1;
       }
-      if (index - 3 === direction) {
-        value = 0;
+      if (index - 3 === neighbor) {
+        direction = 0;
         inverse = 2;
       }
 
-      if ((ctx.currentPlayer === '0' && G.secondPlayerCaptures.includes(direction)) || (ctx.currentPlayer === '1' && G.firstPlayerCaptures.includes(direction))) {
-        let capture = checkCard(value, G.selectedCard, G.cells[direction], inverse, ctx.currentPlayer);
+      if ((ctx.currentPlayer === '0' && G.secondPlayerCaptures.includes(neighbor)) || (ctx.currentPlayer === '1' && G.firstPlayerCaptures.includes(neighbor))) {
+        let capture = checkCard(direction, inverse, G.cells[neighbor], G.selectedCard, ctx.currentPlayer);
+
         if (capture) {
           if (ctx.currentPlayer === '0') {
-            const index = G.secondPlayerCaptures.indexOf(direction);
+            const index = G.secondPlayerCaptures.indexOf(neighbor);
             G.secondPlayerCaptures.splice(index, 1);
-            G.firstPlayerCaptures.push(direction);
+            G.firstPlayerCaptures.push(neighbor);
           } else {
-            const index = G.firstPlayerCaptures.indexOf(direction);
+            const index = G.firstPlayerCaptures.indexOf(neighbor);
             G.firstPlayerCaptures.splice(index, 1);
-            G.secondPlayerCaptures.push(direction);
+            G.secondPlayerCaptures.push(neighbor);
           }
         }
       }
