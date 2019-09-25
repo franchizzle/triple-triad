@@ -1,6 +1,7 @@
 .tripleTriadGame {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .board {
   display: grid;
@@ -32,13 +33,20 @@
 
 .card {
   border: 1px solid gray;
+  border-radius: 5px;
   display: grid;
   grid-template-areas: ". top ."
                     "left . right"
                       ". bottom .";
   margin: 1em;
+  min-height: 50px;
+  min-width: 40px;
   padding: .25em;
   pointer-events: none;
+
+  &.blank {
+    display: none;
+  }
 }
 
 .current .card {

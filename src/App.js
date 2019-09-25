@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './App.css';
+import './App.scss';
 
 import { Client } from 'boardgame.io/react';
 import TripleTriad from './TripleTriad';
