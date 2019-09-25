@@ -7,14 +7,8 @@
  * @param playerCard: the current player's card
 */
 export function checkCard(direction, inverse, cell, playerCard, currentPlayer) {
-  console.log("direction: " + direction);
-  console.log("inverse: " + inverse + " " + typeof(inverse));
-  console.log("cell: " + cell);
-  console.log("playerCard: " + playerCard);
-  console.log("currentPlayer: " + currentPlayer);
 
   const enemyCard = cell.card;
-  console.log("enemy card: " + enemyCard);
 
   if (enemyCard) {
     if (playerCard[direction] > enemyCard[inverse]) {
