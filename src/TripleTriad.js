@@ -26,6 +26,7 @@ const TripleTriad = Game({
      * Sets the selectedCard in the game state. This card can now be placed on the board.
     */
     selectCard(G, ctx, index) {
+      G.selectedCardIndex = index;
       if (ctx.currentPlayer === '0') {
         G.selectedCard = G.firstPlayerHand[index];
       } else {
@@ -54,7 +55,8 @@ const TripleTriad = Game({
           G.secondPlayerCaptures.push(index);
           player = G.secondPlayerHand;
         }
-        removeCardFromHand(player);
+
+        removeCardFromHand(player, G.selectedCardIndex);
         flipCards(G, ctx, index);
         unsetSelectedCard(G);
       }
