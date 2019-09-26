@@ -29,18 +29,10 @@
   width: 150px;
 }
 
-.cell p {
-  font-size: 4em;
-  margin: 0;
-}
-
 .card {
   border: 1px solid gray;
   border-radius: 5px;
   display: grid;
-  grid-template-areas: ". top ."
-                    "left . right"
-                      ". bottom .";
   margin: 1em;
   padding: .25em;
   pointer-events: none;
@@ -52,6 +44,10 @@
   &.blank {
     display: none;
   }
+}
+
+.card-image-wrapper {
+  background-size: cover;
 }
 
 .current .card {
@@ -72,7 +68,6 @@
   grid-template-areas: ". top ."
                     "left . right"
                       ". bottom .";
-  grid-area: top left;
   height: 50px;
   width: 40px;
 }
