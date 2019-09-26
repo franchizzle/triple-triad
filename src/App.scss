@@ -1,20 +1,39 @@
 @import "styles/reset";
 
-.tripleTriadGame {
-  // display: flex;
-  display: grid;
-  grid-template-rows: 200px 1fr;
+.game-ui-wrapper {
+  width: 100%;
+  background: #FFF;
+  height: 80px;
+}
+
+.game-ui {
   max-width: 800px;
   margin: 0 auto;
-  .game-ui {
-
-  }
-  .game-board {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
+
+.topbar-title {
+  flex: 1;
+  text-align: center;
+}
+
+.player-name {
+  width: calc(140px + 1em);
+  padding-left: 1em;
+  text-align: left;
+}
+
+.game-board {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 .board {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
