@@ -78,7 +78,6 @@ class GameBoard extends Component {
             score={this.props.G.secondPlayerCaptures.length}
             onCardClick={(card) => this.onCardClick(card)}
           />
-        <div>{ winner }</div>
         </div>
       </div>
     )

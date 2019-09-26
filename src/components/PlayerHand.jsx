@@ -26,7 +26,6 @@ class PlayerHand extends Component {
             )
           })
         }
-        <div>Score: {score} </div>
       </div>
     )
   }
