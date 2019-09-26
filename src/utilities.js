@@ -11,7 +11,7 @@ export function checkCard(direction, inverse, neighbor, playerCard, currentPlaye
   const enemyCard = neighbor.card;
 
   if (enemyCard) {
-    if (playerCard[direction] > enemyCard[inverse]) {
+    if (playerCard.values[direction] > enemyCard.values[inverse]) {
       neighbor.player = currentPlayer;
       return true;
     }
@@ -73,7 +73,7 @@ export function checkNeighbors(index) {
     case 8:
         return [5, 7];
     default:
-      console.log('Sorry, we are out of ' + index + '.');
+      console.log('neighbord error');
   }
 }
 
