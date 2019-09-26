@@ -60,6 +60,7 @@
 
 .card-image-wrapper {
   background-size: cover;
+  position: relative;
 }
 
 .current .card {
@@ -69,10 +70,29 @@
 .card.player1 {
   background: red;
 }
+.player1 .card-image-wrapper:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255,0,0,0.1);
+  z-index: 1;
+}
 
 .card.player2 {
   background: blue;
-
+}
+.player2 .card-image-wrapper:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,255,0.1);
+  z-index: 1;
 }
 
 .card-scores {
@@ -82,6 +102,8 @@
                       ". bottom .";
   height: 50px;
   width: 40px;
+  z-index: 2;
+  position: relative;
 }
 .card-score {
   color: white;
