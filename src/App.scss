@@ -1,5 +1,11 @@
 @import "styles/reset";
 
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap');
+
+.triple-triad {
+  min-width: 800px;
+}
+
 .game-ui-wrapper {
   width: 100%;
   background: #FFF;
@@ -18,6 +24,14 @@
 .topbar-title {
   flex: 1;
   text-align: center;
+}
+.topbar-title h1 {
+  font-family: 'Abril Fatface', cursive;
+  font-weight: 400;
+  font-size: 40px;
+  margin-top: 10px;
+  margin-bottom: 0;
+
 }
 
 .player-name {
