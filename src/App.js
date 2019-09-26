@@ -44,26 +44,32 @@ class GameBoard extends Component {
 
     return (
       <div className="tripleTriadGame">
-        <PlayerHand
-          hand={this.props.G.firstPlayerHand}
-          active={this.isFirstPlayer()}
-          player={"player1"}
-          score={this.props.G.firstPlayerCaptures.length}
-          onCardClick={(card) => this.onCardClick(card)}
-        />
-        <Board
-          cells={this.props.G.cells}
-          selectedCard={this.props.G.selectedCard}
-          onBoardCellClick={(index) => this.onBoardCellClick(index)}
-        />
-        <PlayerHand
-          hand={this.props.G.secondPlayerHand}
-          active={!this.isFirstPlayer()}
-          player={"player2"}
-          score={this.props.G.secondPlayerCaptures.length}
-          onCardClick={(card) => this.onCardClick(card)}
-        />
+        <div className="game-ui">
+          Player 1: {this.props.G.firstPlayerCaptures.length }
+          Player 2: {this.props.G.secondPlayerCaptures.length }
+        </div>
+        <div className="game-board">
+          <PlayerHand
+            hand={this.props.G.firstPlayerHand}
+            active={this.isFirstPlayer()}
+            player={"player1"}
+            score={this.props.G.firstPlayerCaptures.length}
+            onCardClick={(card) => this.onCardClick(card)}
+          />
+          <Board
+            cells={this.props.G.cells}
+            selectedCard={this.props.G.selectedCard}
+            onBoardCellClick={(index) => this.onBoardCellClick(index)}
+          />
+          <PlayerHand
+            hand={this.props.G.secondPlayerHand}
+            active={!this.isFirstPlayer()}
+            player={"player2"}
+            score={this.props.G.secondPlayerCaptures.length}
+            onCardClick={(card) => this.onCardClick(card)}
+          />
         <div>{ winner }</div>
+        </div>
       </div>
     )
   }
@@ -72,6 +78,7 @@ class GameBoard extends Component {
 const App = Client({
   game: TripleTriad,
   board: GameBoard,
+  debug: false,
 });
 
 export default App;
