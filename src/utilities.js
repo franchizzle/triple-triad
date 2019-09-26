@@ -28,16 +28,19 @@ export function removeCardFromHand(playerHand, index) {
 
 
 /* randomizeCards
- * Generates a hand of five random cards
+ * Generates a hand of five random cards, with randomized images
+ * cacheBuster is used to force the app to make a new network request for each card image
  * @param ctx: the boardgame.io context object
  * @returns: an array of 5 cards; each card is an array of 4 values from 1-10
 */
 export function randomizeCards(ctx) {
   let cards = [];
+  
   for(let i = 0; i < 5; i++) {
+    const cacheBuster = Math.floor(Math.random() * 1000);
     cards.push({
       values: ctx.random.Die(10, 4),
-      image: "url(https://placedog.net/270/" + (400 + i) + ")" 
+      image: "url(https://placedog.net/270/400/" + cacheBuster + ")" 
     });
   }
   return cards;
