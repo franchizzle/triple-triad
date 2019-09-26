@@ -75,6 +75,7 @@ class GameBoard extends Component {
             hand={this.props.G.secondPlayerHand}
             active={!this.isFirstPlayer()}
             player={"player2"}
+            selectedCard={this.props.G.selectedCard}
             score={this.props.G.secondPlayerCaptures.length}
             onCardClick={(card) => this.onCardClick(card)}
           />
