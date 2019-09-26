@@ -43,7 +43,7 @@ class GameBoard extends Component {
     }
 
     return (
-      <div className="tripleTriadGame">
+      <div className="triple-triad">
         <div className="game-ui-wrapper">
           <div className="game-ui">
             <div className="player-name">
