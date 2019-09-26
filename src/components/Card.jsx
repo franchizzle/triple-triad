@@ -15,7 +15,7 @@ class Card extends Component {
             { card.values.map((v) => {
                 return (
                   <p className="card-score">
-                    {v === '10' ? 'A' : v }
+                    {v === 10 ? 'A' : v }
                   </p>
                 )
               })
