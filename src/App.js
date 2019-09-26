@@ -41,6 +41,9 @@ class GameBoard extends Component {
         <div id="winner">Draw!</div>
       );
     }
+    let player1Score = this.props.G.firstPlayerCaptures.length + this.props.G.firstPlayerHand.length;
+    let player2Score = this.props.G.secondPlayerCaptures.length + this.props.G.secondPlayerHand.length;
+
 
     return (
       <div className="triple-triad">
@@ -51,7 +54,7 @@ class GameBoard extends Component {
                 <p>Player 1</p>
               </div>
               <div className="player-score">
-                <h2>{this.props.G.firstPlayerCaptures.length}</h2>
+                <h2>{player1Score}</h2>
               </div>
             </div>
             <div className="topbar-title">
@@ -62,7 +65,7 @@ class GameBoard extends Component {
                 <p>Player 2</p>
               </div>
               <div className="player-score">
-                <h2>{this.props.G.secondPlayerCaptures.length}</h2>
+                <h2>{player2Score}</h2>
               </div>
             </div>
           </div>
