@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 
 class Card extends Component {
   render() {
-    const { card, index, player } = this.props;
+    const { card, index, player, selectedCard } = this.props;
+
     if (!card.values.map) {
       return (
         <div></div>
       )
     } else {
     return (
-      <div className={"card " + player} onClick={() => this.props.onCardClick(index)}>
+      <div className={"card " + player + " " + (card == selectedCard ? "active" : "")} onClick={() => this.props.onCardClick(index)}>
         <div className="card-image-wrapper" style={{backgroundImage: card.image}}>
           <div className="card-scores">
             { card.values.map((v) => {
