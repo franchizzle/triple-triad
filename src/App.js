@@ -70,6 +70,20 @@ class GameBoard extends Component {
             </div>
           </div>
         </div>
+        <div className={"turn-UI " + (this.isFirstPlayer() ? "p1-turn" : "p2-turn")}>
+          <div className="turn-UI--svg-wrapper">
+            <svg version="1.1" x="0px" y="0px" width="100px" height="80px" viewBox="0 0 250 250" enable-background="new 0 0 250 250">
+              <g id="Layer_1">
+              </g>
+              <g id="Layer_2">
+              <polygon fill="#ffff00" stroke="#dddd33" stroke-width="3" stroke-miterlimit="10" points="69.445,125 125,28.774 180.556,125
+                125,221.227 	"/>
+              <polygon fill="#ffff00" stroke="#dddd33" stroke-width="3" stroke-miterlimit="10" points="103.008,125 125,86.909 146.992,125
+                125,163.092 	"/>
+              </g>
+            </svg>
+          </div>
+        </div>
         <div className="game-board">
           <PlayerHand
             hand={this.props.G.firstPlayerHand}
