@@ -46,14 +46,24 @@ class GameBoard extends Component {
       <div className="triple-triad">
         <div className="game-ui-wrapper">
           <div className="game-ui">
-            <div className="player-name">
-              Player 1: {this.props.G.firstPlayerCaptures.length }
+            <div className="player-header player1-header">
+              <div className="player-name">
+                <p>Player 1</p>
+              </div>
+              <div className="player-score">
+                <h2>{this.props.G.firstPlayerCaptures.length}</h2>
+              </div>
             </div>
             <div className="topbar-title">
               <h1>Triple Triad</h1>
             </div>
-            <div className="player-name">
-              Player 2: {this.props.G.secondPlayerCaptures.length }
+            <div className="player-header player2-header">
+              <div className="player-name">
+                <p>Player 2</p>
+              </div>
+              <div className="player-score">
+                <h2>{this.props.G.secondPlayerCaptures.length}</h2>
+              </div>
             </div>
           </div>
         </div>

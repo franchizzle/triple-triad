@@ -34,10 +34,20 @@
 
 }
 
-.player-name {
+.player-header {
   width: calc(140px + 1em);
-  padding-left: 1em;
-  text-align: left;
+  text-align: center;
+}
+.player2-header {
+  transform: translateX(-1em);
+}
+.player-name p {
+  font-weight: bold;
+  margin: 5px 0;
+}
+.player-score h2 {
+  font-weight: 600;
+  margin: 5px 0;
 }
 
 .game-board {
