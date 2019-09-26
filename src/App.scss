@@ -111,6 +111,10 @@
   pointer-events: auto;
 }
 
+.player {
+  min-width: 172px;
+}
+
 .card.player1 {
   background: red;
 }
