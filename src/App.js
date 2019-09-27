@@ -127,7 +127,7 @@ class GameBoard extends Component {
 const App = Client({
   game: TripleTriad,
   board: GameBoard,
-  debug: true,
+  debug: false,
 });
 
 export default App;
