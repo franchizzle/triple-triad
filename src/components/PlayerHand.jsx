@@ -10,7 +10,7 @@ import Card from './Card';
 */
 class PlayerHand extends Component {
   render() {
-    const { active, hand, score, player } = this.props;
+    const { active, hand, score, player, selectedCard } = this.props;
     return (
       <div className={`player ${active ? "current" : ""}`}>
         {
@@ -21,11 +21,11 @@ class PlayerHand extends Component {
                 index={index}
                 onCardClick={(index) => this.props.onCardClick(index)}
                 card={card}
+                selectedCard={selectedCard}
               />
             )
           })
         }
-        <div>Score: {score} </div>
       </div>
     )
   }

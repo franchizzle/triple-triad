@@ -65,14 +65,18 @@ const TripleTriad = Game({
 
   flow: {
     endGameIf: (G, ctx) => {
-      // if win
+      // The game is OVER if all of the grid cells have a card
       if (G.cells.every(cell => cell.card !== null)) {
         console.log("end game");
-        if (G.secondPlayerCaptures.length > G.firstPlayerCaptures.length) {
+        //
+        const firstPlayerPoints = G.firstPlayerCaptures.length + G.firstPlayerHand.length;
+        const secondPlayerPoints = G.secondPlayerCaptures.length + G.secondPlayerHand.length;
+
+        if (secondPlayerPoints > firstPlayerPoints) {
           return { winner: '1' };
-        } else if (G.secondPlayerCaptures.length < G.firstPlayerCaptures.length) {
+        } else if (firstPlayerPoints > secondPlayerPoints) {
           return { winner: '0' };
-        } else if (G.secondPlayerCaptures.length === G.firstPlayerCaptures.length) {
+        } else if (firstPlayerPoints === secondPlayerPoints) {
           return { draw: 'true' };
         }
       }

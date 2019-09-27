@@ -1,21 +1,117 @@
-.tripleTriadGame {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@import "styles/reset";
+
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap');
+
+.triple-triad {
+  min-width: 800px;
 }
+
+.game-ui-wrapper {
+  width: 100%;
+  background: #FFF;
+  height: 80px;
+}
+
+.game-ui {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.turn-UI {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  &.p1-turn .turn-UI--svg-wrapper {
+    left: 0;
+  }
+  &.p2-turn .turn-UI--svg-wrapper {
+    right: 0;
+  }
+}
+.turn-UI--svg-wrapper {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  width: 170px;
+  text-align: center;
+  transition: all 222ms linear;
+}
+.turn-UI--svg-wrapper svg {
+  animation-name: spinner;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+}
+
+@keyframes spinner {
+   from {
+     transform: rotate3d(0, 1, 0, 0deg);
+   }
+   to {
+     transform: rotate3d(0, 1, 0, 360deg);
+   }
+ }
+
+
+.topbar-title {
+  flex: 1;
+  text-align: center;
+}
+.topbar-title h1 {
+  font-family: 'Abril Fatface', cursive;
+  font-weight: 400;
+  font-size: 40px;
+  margin-top: 10px;
+  margin-bottom: 0;
+
+}
+
+.player-header {
+  width: calc(140px + 1em);
+  text-align: center;
+}
+.player2-header {
+  transform: translateX(-1em);
+}
+.player-name p {
+  font-weight: bold;
+  margin: 5px 0;
+}
+.player-score h2 {
+  font-weight: 600;
+  margin: 5px 0;
+}
+
+.game-board {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 .board {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  height: 300px;
-  width: 300px;
+  width: 100%;
+  height: 600px;
+  margin-top: 75px;
+  border: 2px solid #aaa;
+  box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
 }
 
 .cell:nth-child(even) {
-  background: gray;
+  background: #efefde;
 }
 
 .cell:nth-child(odd) {
-  background: pink;
+  background: #dedecd;
 }
 
 .cell {
@@ -23,53 +119,145 @@
   color: #fff;
   display: flex;
   justify-content: center;
-  min-height: 100px;
-}
-
-.cell p {
-  font-size: 4em;
-  margin: 0;
+  height: 200px;
+  max-width: 170px;
 }
 
 .card {
   border: 1px solid gray;
   border-radius: 5px;
   display: grid;
-  grid-template-areas: ". top ."
-                    "left . right"
-                      ". bottom .";
   margin: 1em;
-  min-height: 50px;
-  min-width: 40px;
   padding: .25em;
   pointer-events: none;
-
+  height: 180px;
+  max-height: 180px;
+  width: 130px;
+  max-width: 130px;
+  background-size: cover !important;
   &.blank {
     display: none;
   }
+}
+
+.card-image-wrapper {
+  background-size: cover;
+  position: relative;
 }
 
 .current .card {
   pointer-events: auto;
 }
 
+.player {
+  min-width: 172px;
+}
+
 .card.player1 {
   background: red;
+}
+.player1 .card-image-wrapper:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255,0,0,0.1);
+  z-index: 1;
 }
 
 .card.player2 {
   background: blue;
 }
+.player2 .card-image-wrapper:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,255,0.1);
+  z-index: 1;
+}
+.player .card {
+  box-shadow: 0px -6px 12px rgba(0,0,0,0.7);
+}
+.card.active {
+  border: 4px solid #FFF;
+  box-shadow: 2px -5px 12px rgba(255,255,153, 0.8);
+}
 
-.cardScore:nth-child(1) {
+.player .card:nth-of-type(2) {
+  transform: translateY(-75px);
+}
+.player .card:nth-of-type(3) {
+  transform: translateY(-150px);
+}
+.player .card:nth-of-type(4) {
+  transform: translateY(-225px);
+}
+.player .card:nth-of-type(5) {
+  transform: translateY(-300px);
+}
+
+.card-scores {
+  display: grid;
+  grid-template-areas: ". top ."
+                    "left . right"
+                      ". bottom .";
+  height: 50px;
+  width: 40px;
+  z-index: 2;
+  position: relative;
+}
+.card-score {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  text-shadow: 0px 0px 3px #000;
+  margin: 0;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+.card-score:nth-child(1) {
   grid-area: top;
 }
-.cardScore:nth-child(2) {
+.card-score:nth-child(2) {
   grid-area: right;
 }
-.cardScore:nth-child(3) {
+.card-score:nth-child(3) {
   grid-area: bottom;
 }
-.cardScore:nth-child(4) {
+.card-score:nth-child(4) {
   grid-area: left;
+}
+
+.endgame-modal--wrapper {
+  position: fixed;
+  z-index:5;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0,0,0,0.4);
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.endgame-modal {
+  background-color: #fff;
+  border-radius: 5px;
+  min-width: 460px;
+  padding: 20px;
+  h1 {
+    font-family: 'Abril Fatface', cursive;
+    font-weight: 400;
+  }
+}
+
+body {
+  background-image: url('/dogs.svg');
+  background-color: #DFDBE5;
 }
