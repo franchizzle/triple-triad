@@ -234,6 +234,29 @@
   grid-area: left;
 }
 
+.endgame-modal--wrapper {
+  position: fixed;
+  z-index:5;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0,0,0,0.4);
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.endgame-modal {
+  background-color: #fff;
+  border-radius: 5px;
+  min-width: 460px;
+  padding: 20px;
+  h1 {
+    font-family: 'Abril Fatface', cursive;
+    font-weight: 400;
+  }
+}
+
 body {
   background-image: url('/dogs.svg');
   background-color: #DFDBE5;

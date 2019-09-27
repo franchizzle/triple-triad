@@ -32,18 +32,15 @@ class GameBoard extends Component {
     return this.props.ctx.currentPlayer === '0';
   }
 
+  restart() {
+    this.props.reset();
+  }
+
   render() {
     let winner = '';
-    if (this.props.ctx.gameover) {
-      winner = this.props.ctx.gameover.winner !== undefined ? (
-        <div id="winner">Winner: {this.props.ctx.gameover.winner}</div>
-      ) : (
-        <div id="winner">Draw!</div>
-      );
-    }
-    let player1Score = this.props.G.firstPlayerCaptures.length + this.props.G.firstPlayerHand.length;
-    let player2Score = this.props.G.secondPlayerCaptures.length + this.props.G.secondPlayerHand.length;
-
+    const gameover = this.props.ctx.gameover;
+    const player1Score = this.props.G.firstPlayerCaptures.length + this.props.G.firstPlayerHand.length;
+    const player2Score = this.props.G.secondPlayerCaptures.length + this.props.G.secondPlayerHand.length;
 
     return (
       <div className="triple-triad">
@@ -107,6 +104,21 @@ class GameBoard extends Component {
             onCardClick={(card) => this.onCardClick(card)}
           />
         </div>
+        { gameover !== null && this.props.ctx.gameover
+          ? <div className="endgame-modal--wrapper">
+              <div className="endgame-modal">
+                { gameover.winner !== undefined ? (
+                    <h1>Player {(parseInt(gameover.winner) + 1)} Wins!</h1>
+                  ) : (
+                    <h1>Draw!</h1>
+                  )
+                }
+                <button onClick={() => this.restart()}>Reset</button>
+              </div>
+            </div>
+          : null
+        }
+
       </div>
     )
   }
@@ -115,7 +127,7 @@ class GameBoard extends Component {
 const App = Client({
   game: TripleTriad,
   board: GameBoard,
-  debug: false,
+  debug: true,
 });
 
 export default App;
