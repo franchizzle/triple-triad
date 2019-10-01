@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Card from './Card';
+import DroppableBoardSquare from './DroppableBoardSquare';
 
 /* Board
  * @props cells: the boardgame.io game object for the grid cells
@@ -20,7 +20,7 @@ class Board extends Component {
     return;
   }
   render() {
-    const { cells, selectedCard } = this.props;
+    const { cells } = this.props;
 
     return (
       <div className="board">
@@ -28,17 +28,15 @@ class Board extends Component {
           cells.map((id, index) => {
             let card = id.card ? id.card : [];
             return (
-              <div key={index} className="cell" onClick={() => this.props.onBoardCellClick(index)}>
-                { card
-                  ? <Card
-                      player={this.playerCaptured(id.player)}
-                      index={index}
-                      onCardClick={() => this.blank() }
-                      card={card}
-                    />
-                  : null
-                }
-              </div>
+              <DroppableBoardSquare
+                key={index}
+                onClick={() => this.props.onBoardCellClick(index)}
+                dropAction={() => this.props.onBoardCellClick(index)}
+                player={this.playerCaptured(id.player)}
+                index={index}
+                onCardClick={() => this.blank() }
+                card={card}
+              />
             )
           })
         }

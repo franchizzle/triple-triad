@@ -188,16 +188,16 @@
   box-shadow: 2px -5px 12px rgba(255,255,153, 0.8);
 }
 
-.player .card:nth-of-type(2) {
+.player .draggable-card-wrapper:nth-of-type(2) {
   transform: translateY(-75px);
 }
-.player .card:nth-of-type(3) {
+.player .draggable-card-wrapper:nth-of-type(3) {
   transform: translateY(-150px);
 }
-.player .card:nth-of-type(4) {
+.player .draggable-card-wrapper:nth-of-type(4) {
   transform: translateY(-225px);
 }
-.player .card:nth-of-type(5) {
+.player .draggable-card-wrapper:nth-of-type(5) {
   transform: translateY(-300px);
 }
 

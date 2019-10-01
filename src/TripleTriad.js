@@ -1,5 +1,5 @@
 import { Game } from 'boardgame.io/core';
-import { checkNeighbors, randomizeCards, removeCardFromHand, checkCard, unsetSelectedCard, flipCards } from './utilities';
+import { randomizeCards, removeCardFromHand, unsetSelectedCard, flipCards } from './utilities';
 
 const TripleTriad = Game({
   /* Setup:
@@ -67,8 +67,7 @@ const TripleTriad = Game({
     endGameIf: (G, ctx) => {
       // The game is OVER if all of the grid cells have a card
       if (G.cells.every(cell => cell.card !== null)) {
-        console.log("end game");
-        //
+
         const firstPlayerPoints = G.firstPlayerCaptures.length + G.firstPlayerHand.length;
         const secondPlayerPoints = G.secondPlayerCaptures.length + G.secondPlayerHand.length;
 
