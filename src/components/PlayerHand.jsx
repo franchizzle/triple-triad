@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Card from './Card';
+import DraggableCard from './DraggableCard';
 
 /* Player Hand
  * @props player: the boardgame.io game object for the current player
@@ -16,12 +16,13 @@ class PlayerHand extends Component {
         {
           hand.map((card, index) => {
             return (
-              <Card
+              <DraggableCard
                 player={player}
                 index={index}
                 onCardClick={(index) => this.props.onCardClick(index)}
                 card={card}
                 selectedCard={selectedCard}
+                moves={this.props.moves}
               />
             )
           })
