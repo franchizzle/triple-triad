@@ -89,6 +89,7 @@ class GameBoard extends Component {
             selectedCard={this.props.G.selectedCard}
             score={this.props.G.firstPlayerCaptures.length}
             onCardClick={(card) => this.onCardClick(card)}
+            moves={this.props.moves}
           />
           <Board
             cells={this.props.G.cells}
@@ -102,6 +103,7 @@ class GameBoard extends Component {
             selectedCard={this.props.G.selectedCard}
             score={this.props.G.secondPlayerCaptures.length}
             onCardClick={(card) => this.onCardClick(card)}
+            moves={this.props.moves}
           />
         </div>
         { gameover !== null && this.props.ctx.gameover
