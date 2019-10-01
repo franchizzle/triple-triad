@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import Card from './Card';
 import DroppableBoardSquare from './DroppableBoardSquare';
 
 /* Board
@@ -21,7 +20,7 @@ class Board extends Component {
     return;
   }
   render() {
-    const { cells, selectedCard } = this.props;
+    const { cells } = this.props;
 
     return (
       <div className="board">

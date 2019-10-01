@@ -10,7 +10,7 @@ import DraggableCard from './DraggableCard';
 */
 class PlayerHand extends Component {
   render() {
-    const { active, hand, score, player, selectedCard } = this.props;
+    const { active, hand, player, selectedCard } = this.props;
     return (
       <div className={`player ${active ? "current" : ""}`}>
         {

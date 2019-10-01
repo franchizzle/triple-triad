@@ -35,12 +35,12 @@ export function removeCardFromHand(playerHand, index) {
 */
 export function randomizeCards(ctx) {
   let cards = [];
-  
+
   for(let i = 0; i < 5; i++) {
     const cacheBuster = Math.floor(Math.random() * 1000);
     cards.push({
       values: ctx.random.Die(10, 4),
-      image: "url(https://placedog.net/270/400/" + cacheBuster + ")" 
+      image: "url(https://placedog.net/270/400/" + cacheBuster + ")"
     });
   }
   return cards;
@@ -76,7 +76,7 @@ export function checkNeighbors(index) {
     case 8:
         return [5, 7];
     default:
-      console.log('neighbord error');
+      console.log('neighbor error');
   }
 }
 
@@ -134,6 +134,7 @@ export function flipCards(G, ctx, index) {
         }
       }
     }
+    return true;
   });
 }
 

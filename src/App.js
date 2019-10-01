@@ -35,7 +35,6 @@ class GameBoard extends Component {
   }
 
   render() {
-    let winner = '';
     const gameover = this.props.ctx.gameover;
     const player1Score = this.props.G.firstPlayerCaptures.length + this.props.G.firstPlayerHand.length;
     const player2Score = this.props.G.secondPlayerCaptures.length + this.props.G.secondPlayerHand.length;
@@ -67,13 +66,13 @@ class GameBoard extends Component {
         </div>
         <div className={"turn-UI " + (this.isFirstPlayer() ? "p1-turn" : "p2-turn")}>
           <div className="turn-UI--svg-wrapper">
-            <svg version="1.1" x="0px" y="0px" width="100px" height="80px" viewBox="0 0 250 250" enable-background="new 0 0 250 250">
+            <svg version="1.1" x="0px" y="0px" width="100px" height="80px" viewBox="0 0 250 250" enableBackground="new 0 0 250 250">
               <g id="Layer_1">
               </g>
               <g id="Layer_2">
-              <polygon fill="#ffff00" stroke="#dddd33" stroke-width="3" stroke-miterlimit="10" points="69.445,125 125,28.774 180.556,125
+              <polygon fill="#ffff00" stroke="#dddd33" strokeWidth="3" strokeMiterlimit="10" points="69.445,125 125,28.774 180.556,125
                 125,221.227 	"/>
-              <polygon fill="#ffff00" stroke="#dddd33" stroke-width="3" stroke-miterlimit="10" points="103.008,125 125,86.909 146.992,125
+              <polygon fill="#ffff00" stroke="#dddd33" strokeWidth="3" strokeMiterlimit="10" points="103.008,125 125,86.909 146.992,125
                 125,163.092 	"/>
               </g>
             </svg>
@@ -85,7 +84,6 @@ class GameBoard extends Component {
             active={this.isFirstPlayer()}
             player={"player1"}
             selectedCard={this.props.G.selectedCard}
-            score={this.props.G.firstPlayerCaptures.length}
             onCardClick={(card) => this.onCardClick(card)}
             moves={this.props.moves}
           />
@@ -99,7 +97,6 @@ class GameBoard extends Component {
             active={!this.isFirstPlayer()}
             player={"player2"}
             selectedCard={this.props.G.selectedCard}
-            score={this.props.G.secondPlayerCaptures.length}
             onCardClick={(card) => this.onCardClick(card)}
             moves={this.props.moves}
           />
