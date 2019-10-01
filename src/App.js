@@ -14,11 +14,9 @@ class GameBoard extends Component {
   }
 
   onBoardCellClick(id) {
-    if(this.cellIsEmpty(id)) {
+    if (this.cellIsEmpty(id)) {
       this.props.moves.selectCell(id);
-      if (this.props.G.selectedCard !== null) {
-        this.props.events.endTurn();
-      }
+      this.props.events.endTurn();
     }
   }
 
