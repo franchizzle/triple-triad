@@ -19,7 +19,7 @@ class GameView extends Component {
 
   render() {
     return (
-      <div>hi
+      <div>
         {
           Client( { game: GameView.TripleTriad })
         }
